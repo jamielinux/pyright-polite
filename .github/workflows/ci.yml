@@ -1,0 +1,137 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - 'main'
+    paths-ignore:
+      - '.changelog.d/**'
+      - '.github/workflows/*'
+      - 'CHANGELOG.*'
+      - 'README.*'
+      - 'src/*/__about__.py'
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash
+
+concurrency:
+  group: '${{ github.workflow }}-${{ github.ref }}'
+  cancel-in-progress: true
+
+env:
+  PIP_DISABLE_PIP_VERSION_CHECK: 1
+  PYTHONUNBUFFERED: 1
+  FORCE_COLOR: 1
+
+permissions:
+  contents: read
+
+
+jobs:
+
+  test:
+    name: 'Test with python ${{ matrix.python-version }} on ${{ matrix.os }}'
+    timeout-minutes: 20
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        python-version: ['3.7', '3.8', '3.9', '3.10', '3.11', 'pypy3.7', 'pypy3.8', 'pypy3.9']
+        include:
+          - os: macos-latest
+            python-version: '3.7'
+          - os: macos-latest
+            python-version: '3.11'
+          - os: windows-latest
+            python-version: '3.7'
+          - os: windows-latest
+            python-version: '3.11'
+
+    steps:
+
+      - name: 'Checkout'
+        uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3  # v3.5.0
+
+      - name: 'Install python'
+        uses: actions/setup-python@d27e3f3d7c64b4bbf8e4abfb9b63b83e846e0435  # v4.5.0
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: 'Install hatch'
+        run: |
+          python -m pip install --upgrade hatch
+
+      - name: 'Run tests'
+        run: >
+          hatch run +py=${{ matrix.python-version }} ci:cov
+          --data-file '.coverage.${{ matrix.os }}.${{ matrix.python-version }}'
+
+      - name: 'Upload coverage'
+        uses: actions/upload-artifact@0b7f8abb1508181956e8e162db84b466c27e18ce  # v3.1.2
+        with:
+          name: coverage
+          path: '.coverage.*'
+          if-no-files-found: error
+          retention-days: 30
+
+
+  covbadge:
+    if: github.repository == 'jamielinux/pyright-polite' && github.ref == 'refs/heads/main'
+    name: 'Code coverage badge'
+    timeout-minutes: 20
+    runs-on: ubuntu-latest
+    needs: [test]
+
+    steps:
+
+      - name: 'Harden Runner'
+        uses: step-security/harden-runner@03bee3930647ebbf994244c21ddbc0d4933aab4f  # v2.3.0
+        with:
+          disable-sudo: true
+          egress-policy: block
+          allowed-endpoints: >
+            api.github.com:443
+            files.pythonhosted.org:443
+            github.com:443
+            pypi.org:443
+
+      - name: 'Checkout'
+        uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3  # v3.5.0
+
+      - name: 'Install python'
+        uses: actions/setup-python@d27e3f3d7c64b4bbf8e4abfb9b63b83e846e0435  # v4.5.0
+        with:
+          python-version: '3.11'
+
+      - name: 'Install hatch'
+        run: |
+          python -m pip install --upgrade hatch
+
+      - name: 'Download coverage'
+        uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a  # v3.0.2
+        with:
+          name: coverage
+
+      - name: 'Combine coverage'
+        run: |
+          hatch run +py=3.11 ci:cov-combine
+          export TOTAL=$(python -c \
+              "import json;print(json.load(open('coverage.json'))['totals']['percent_covered_display'])")
+          echo "total=$TOTAL" >> $GITHUB_ENV
+          echo "### Total coverage: ${TOTAL}%" >> $GITHUB_STEP_SUMMARY
+
+      - name: 'Coverage badge'
+        uses: schneegans/dynamic-badges-action@5d424ad4060f866e4d1dab8f8da0456e6b1c4f56  # v1.6.0
+        with:
+          auth: ${{ secrets.GIST_TOKEN }}
+          gistID: ed2d4df7c2b137ac89778db60ef8894f
+          filename: pyright-polite.covbadge.json
+          label: coverage
+          message: ${{ env.total }}%
+          minColorRange: 70
+          maxColorRange: 90
+          valColorRange: ${{ env.total }}

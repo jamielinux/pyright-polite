@@ -1,0 +1,36 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: f71fa2c1f9cf5cb705f73dffe4b21f7c61470ba9  # frozen: v4.4.0
+    hooks:
+      - id: check-case-conflict
+      - id: check-merge-conflict
+      - id: check-shebang-scripts-are-executable
+      - id: check-symlinks
+      - id: check-json
+      - id: check-toml
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+        args: ["--fix=lf"]
+      - id: trailing-whitespace
+  - repo: local
+    hooks:
+      - id: pylint
+        name: pylint
+        entry: pylint
+        language: system
+        types: [python]
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: f6346ef27faac608d493bf3926528b308d175d9e  # frozen: v0.0.261
+    hooks:
+      - id: ruff
+  - repo: https://github.com/psf/black
+    rev: bf7a16254ec96b084a6caf3d435ec18f0f245cc7  # frozen: 23.3.0
+    hooks:
+      - id: black
+  - repo: https://github.com/bwhmather/ssort
+    rev: 85ce691bd9dd6528a267aaf3e1ac7d455ecd773c  # frozen: v0.11.6
+    hooks:
+      - id: ssort

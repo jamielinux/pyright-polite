@@ -1,0 +1,9 @@
+[MAIN]
+ignore-patterns=.*test.*
+jobs=0
+
+[MESSAGES CONTROL]
+disable=
+
+[DESIGN]
+max-attributes=10

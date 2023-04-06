@@ -1,0 +1,54 @@
+[version]
+path = "src/pyright_polite/__about__.py"
+
+# Local tests
+[envs.default]
+dependencies = [
+  "black >= 23.1.0",
+  "coverage ~= 7.2",
+  "hatch-containers ~= 0.7",
+  "pre-commit ~= 3.2",
+  "pylint ~= 2.17",
+  "pytest ~= 7.2",
+  "pytest-asyncio ~= 0.21",
+  "ruff >= 0.0.257",
+  "scriv >= 1.2.1",
+  "ssort >= 0.11.6",
+]
+[envs.default.scripts]
+cov = ["coverage run {args}", "coverage report -m"]
+lint = [
+  "- ruff check .",
+  "- pylint src",
+  "- black --quiet --check --diff .",
+  "- pyright-polite",
+  "- ssort --check --diff .",
+]
+
+# Templates
+[envs.base]
+dependencies = [
+  "coverage ~= 7.2",
+  "pytest ~= 7.2",
+  "pytest-asyncio ~= 0.21",
+]
+
+# pyenv
+[envs.pyenv]
+template = "base"
+platforms = ["linux"]
+[envs.pyenv.scripts]
+cov = ["coverage run {args}", "coverage report -m"]
+test = ["pytest {args}"]
+[[envs.pyenv.matrix]]
+python = ["3.7", "3.8", "3.9", "3.10", "3.11"]
+
+# GitHub Workflow: CI
+[envs.ci]
+template = "base"
+platforms = ["linux", "macos", "windows"]
+[envs.ci.scripts]
+cov = ["coverage run {args}", "coverage combine -q --keep", "coverage report -m"]
+cov-combine = ["coverage combine -q", "coverage json -q -o coverage.json"]
+[[envs.ci.matrix]]
+python = ["3.7", "3.8", "3.9", "3.10", "3.11", "pypy3.7", "pypy3.8", "pypy3.9"]
