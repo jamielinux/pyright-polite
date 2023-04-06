@@ -12,7 +12,7 @@
 [license-url]: https://github.com/jamielinux/pyright-polite/blob/main/LICENSE
 [ci-img]: https://github.com/jamielinux/pyright-polite/actions/workflows/ci.yml/badge.svg
 [ci-url]: https://github.com/jamielinux/pyright-polite/actions/workflows/ci.yml
-[coverage-img]: https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/jamielinux/f3b70fb7174f1a8a87f2185e80cbb2ef/raw/pyright-polite.covbadge.json
+[coverage-img]: https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/jamielinux/ed2d4df7c2b137ac89778db60ef8894f/raw/pyright-polite.covbadge.json
 [coverage-url]: https://github.com/jamielinux/pyright-polite/actions/workflows/ci.yml
 [python-img]: https://img.shields.io/pypi/pyversions/pyright-polite.svg
 [python-url]: https://pypi.org/project/pyright-polite
