@@ -7,7 +7,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pyright-polite"
-description = "An intelligent wrapper for pyright that makes it less noisy."
+description = "An intelligent cross-platform wrapper for pyright that makes it less noisy."
 readme = "README.md"
 requires-python = ">=3.7"
 license = "MIT"

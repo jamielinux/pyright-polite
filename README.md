@@ -19,7 +19,8 @@
 
 ---
 
-**pyright-polite** is an intelligent wrapper for [pyright][0] that makes it less noisy.
+**pyright-polite** is an intelligent cross-platform wrapper for [pyright][0] that makes
+it less noisy.
 
 Force pyright to be more respectful with your attention :rotating_light:
 
@@ -84,6 +85,8 @@ either the [pyright npm][pkg_npm] or the [pyright PyPI][pkg_pypi] package.
 $ npm install pyright  # alternatively: pip install pyright
 $ pip install pyright-polite
 ```
+
+Linux, macOS and Windows are all supported.
 
 [pkg_pypi]: https://pypi.org/project/pyright/
 [pkg_npm]: https://www.npmjs.com/package/pyright
