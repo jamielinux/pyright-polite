@@ -134,7 +134,7 @@ stdout using `asyncio` tasks, which means that `--watch` is also supported.
 For insight into what messages get hidden, see the [`print_filtered`][print_filtered]
 method.
 
-[print_filtered]: https://github.com/jamielinux/pyright-polite/blob/main/src/pyright_polite/pyright.py#L183-L233
+[print_filtered]: https://github.com/jamielinux/pyright-polite/blob/379f5ed852388000f0c874bff089d72777c90db8/src/pyright_polite/pyright.py#L183-L233
 
 ## Isn't this a bit overkill?
 
