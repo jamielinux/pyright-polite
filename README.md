@@ -59,8 +59,6 @@ pyright 1.1.300
 Completed in 1.006sec
 ```
 
-Error messages are still shown (eg, if your config file is invalid).
-
 Now pyright is just as polite as your other tools:
 
 ```console
@@ -73,6 +71,8 @@ Found 8 source files
 cmd [4] | - ssort --check --diff .
 8 files would be left unchanged
 ```
+
+Error messages are still shown (eg, if your config file is invalid).
 
 ## Installation
 
