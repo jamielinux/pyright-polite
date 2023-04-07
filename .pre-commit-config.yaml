@@ -34,3 +34,4 @@ repos:
     rev: 85ce691bd9dd6528a267aaf3e1ac7d455ecd773c  # frozen: v0.11.6
     hooks:
       - id: ssort
+        args: ["src"]
