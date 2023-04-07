@@ -684,21 +684,24 @@ def stdout_diagnostic_invalid_severity():
 
 @pytest.fixture()
 def expected_stdout_integration():
-    return inspect.cleandoc(
-        f"""
-            Found 1 source file
-            /home/runner/work/pyright-polite/pyright-polite/tests/test_integration/foo.py
-              /home/runner/work/pyright-polite/pyright-polite/tests/test_integration/foo.py:{Fore.YELLOW}4{Fore.RESET}:{Fore.YELLOW}21{Fore.RESET} - {Fore.RED}error{Fore.RESET}: Wildcard import from a library not allowed {Fore.LIGHTBLACK_EX}(reportWildcardImportFromLibrary){Fore.RESET}
-              /home/runner/work/pyright-polite/pyright-polite/tests/test_integration/foo.py:{Fore.YELLOW}6{Fore.RESET}:{Fore.YELLOW}10{Fore.RESET} - {Fore.RED}error{Fore.RESET}: Expression of type "Literal[1]" cannot be assigned to declared type "str"
-                "Literal[1]" is incompatible with "str" {Fore.LIGHTBLACK_EX}(reportGeneralTypeIssues){Fore.RESET}
-              /home/runner/work/pyright-polite/pyright-polite/tests/test_integration/foo.py:{Fore.YELLOW}7{Fore.RESET}:{Fore.YELLOW}10{Fore.RESET} - {Fore.RED}error{Fore.RESET}: Expression of type "Literal['bar']" cannot be assigned to declared type "int"
-                "Literal['bar']" is incompatible with "int" {Fore.LIGHTBLACK_EX}(reportGeneralTypeIssues){Fore.RESET}
-              /home/runner/work/pyright-polite/pyright-polite/tests/test_integration/foo.py:{Fore.YELLOW}8{Fore.RESET}:{Fore.YELLOW}5{Fore.RESET} - {Fore.RED}error{Fore.RESET}: Operator "+" not supported for types "str" and "int"
-                Operator "+" not supported for types "str" and "int" {Fore.LIGHTBLACK_EX}(reportGeneralTypeIssues){Fore.RESET}
-              /home/runner/work/pyright-polite/pyright-polite/tests/test_integration/foo.py:{Fore.YELLOW}8{Fore.RESET}:{Fore.YELLOW}1{Fore.RESET} - {Fore.RED}error{Fore.RESET}: Type of "c" is unknown {Fore.LIGHTBLACK_EX}(reportUnknownVariableType){Fore.RESET}
-              /home/runner/work/pyright-polite/pyright-polite/tests/test_integration/foo.py:{Fore.YELLOW}9{Fore.RESET}:{Fore.YELLOW}4{Fore.RESET} - {Fore.RED}error{Fore.RESET}: "baz" is not defined {Fore.LIGHTBLACK_EX}(reportUndefinedVariable){Fore.RESET}
-              /home/runner/work/pyright-polite/pyright-polite/tests/test_integration/foo.py:{Fore.YELLOW}9{Fore.RESET}:{Fore.YELLOW}1{Fore.RESET} - {Fore.RED}error{Fore.RESET}: Type of "d" is unknown {Fore.LIGHTBLACK_EX}(reportUnknownVariableType){Fore.RESET}
-              /home/runner/work/pyright-polite/pyright-polite/tests/test_integration/foo.py:{Fore.YELLOW}3{Fore.RESET}:{Fore.YELLOW}8{Fore.RESET} - {Fore.RED}error{Fore.RESET}: Import "os" is not accessed {Fore.LIGHTBLACK_EX}(reportUnusedImport){Fore.RESET}
-            8 errors, 0 warnings, 0 informations
-        """
-    ) + "\n"
+    return (
+        inspect.cleandoc(
+            f"""
+                Found 1 source file
+                /home/runner/work/pyright-polite/pyright-polite/tests/test_integration/foo.py
+                  /home/runner/work/pyright-polite/pyright-polite/tests/test_integration/foo.py:{Fore.YELLOW}4{Fore.RESET}:{Fore.YELLOW}21{Fore.RESET} - {Fore.RED}error{Fore.RESET}: Wildcard import from a library not allowed {Fore.LIGHTBLACK_EX}(reportWildcardImportFromLibrary){Fore.RESET}
+                  /home/runner/work/pyright-polite/pyright-polite/tests/test_integration/foo.py:{Fore.YELLOW}6{Fore.RESET}:{Fore.YELLOW}10{Fore.RESET} - {Fore.RED}error{Fore.RESET}: Expression of type "Literal[1]" cannot be assigned to declared type "str"
+                    "Literal[1]" is incompatible with "str" {Fore.LIGHTBLACK_EX}(reportGeneralTypeIssues){Fore.RESET}
+                  /home/runner/work/pyright-polite/pyright-polite/tests/test_integration/foo.py:{Fore.YELLOW}7{Fore.RESET}:{Fore.YELLOW}10{Fore.RESET} - {Fore.RED}error{Fore.RESET}: Expression of type "Literal['bar']" cannot be assigned to declared type "int"
+                    "Literal['bar']" is incompatible with "int" {Fore.LIGHTBLACK_EX}(reportGeneralTypeIssues){Fore.RESET}
+                  /home/runner/work/pyright-polite/pyright-polite/tests/test_integration/foo.py:{Fore.YELLOW}8{Fore.RESET}:{Fore.YELLOW}5{Fore.RESET} - {Fore.RED}error{Fore.RESET}: Operator "+" not supported for types "str" and "int"
+                    Operator "+" not supported for types "str" and "int" {Fore.LIGHTBLACK_EX}(reportGeneralTypeIssues){Fore.RESET}
+                  /home/runner/work/pyright-polite/pyright-polite/tests/test_integration/foo.py:{Fore.YELLOW}8{Fore.RESET}:{Fore.YELLOW}1{Fore.RESET} - {Fore.RED}error{Fore.RESET}: Type of "c" is unknown {Fore.LIGHTBLACK_EX}(reportUnknownVariableType){Fore.RESET}
+                  /home/runner/work/pyright-polite/pyright-polite/tests/test_integration/foo.py:{Fore.YELLOW}9{Fore.RESET}:{Fore.YELLOW}4{Fore.RESET} - {Fore.RED}error{Fore.RESET}: "baz" is not defined {Fore.LIGHTBLACK_EX}(reportUndefinedVariable){Fore.RESET}
+                  /home/runner/work/pyright-polite/pyright-polite/tests/test_integration/foo.py:{Fore.YELLOW}9{Fore.RESET}:{Fore.YELLOW}1{Fore.RESET} - {Fore.RED}error{Fore.RESET}: Type of "d" is unknown {Fore.LIGHTBLACK_EX}(reportUnknownVariableType){Fore.RESET}
+                  /home/runner/work/pyright-polite/pyright-polite/tests/test_integration/foo.py:{Fore.YELLOW}3{Fore.RESET}:{Fore.YELLOW}8{Fore.RESET} - {Fore.RED}error{Fore.RESET}: Import "os" is not accessed {Fore.LIGHTBLACK_EX}(reportUnusedImport){Fore.RESET}
+                8 errors, 0 warnings, 0 informations
+            """
+        )
+        + "\n"
+    )
