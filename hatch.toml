@@ -1,6 +1,15 @@
 [version]
 path = "src/pyright_polite/__about__.py"
 
+[build.targets.sdist]
+exclude = [
+  "/.changelog.d",
+  "/.github",
+  "/package-lock.json",
+  "/package.json",
+  "/tests",
+]
+
 # Local tests
 [envs.default]
 dependencies = [
