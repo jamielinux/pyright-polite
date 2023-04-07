@@ -30,7 +30,7 @@ lint = [
   "- ruff check .",
   "- pylint src",
   "- black --quiet --check --diff .",
-  "- pyright-polite",
+  "- pyright-polite src tests/test_*.py",
   "- ssort --check --diff src",
 ]
 
