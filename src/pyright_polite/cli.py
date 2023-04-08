@@ -185,7 +185,7 @@ def prepare_argv(parsed_args: argparse.Namespace) -> List[str]:
     # If the user passes `--outputjson` manually, always pass this to pyright even if
     # it will clash with one of the other command-line arguments that don't support
     # this mode. We'll just let pyright complain to the user about the clash.
-    if parsed_args.outputjson or set(argv[1:]).isdisjoint(NON_JSON_ARGS):
+    if parsed_args.outputjson or not any(arg in NON_JSON_ARGS for arg in argv[1:]):
         argv.append("--outputjson")
 
     for file in parsed_args.files:
@@ -205,10 +205,10 @@ def deduce_mode(args: List[str]) -> Mode:
     if "--outputjson" in args:
         return mode
 
-    if not set(args).isdisjoint(PLAINTEXT_ARGS):
+    if any(arg in PLAINTEXT_ARGS for arg in args):
         mode = Mode.PLAINTEXT
 
-    if not set(args).isdisjoint(UNFILTERED_ARGS):
+    if any(arg in UNFILTERED_ARGS for arg in args):
         mode = Mode.UNFILTERED
 
     return mode
