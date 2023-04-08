@@ -1,6 +1,8 @@
 # SPDX-FileCopyrightText: Copyright © 2023 Jamie Nguyen <j@jamielinux.com>
 # SPDX-License-Identifier: MIT
 
+import sys
+
 import pytest
 
 
@@ -42,7 +44,7 @@ def test_main_entrypoint_returncodes(
     )
 
 
-@pytest.mark.skipif("sys.platform == 'win32'", reason="POSIX-only")
+@pytest.mark.skipif(sys.platform == "win32", reason="POSIX-only")
 def test_main_entrypoint_negative_returncode(
     event_loop, utils, capsys, stderr, stdout, expected_stdout
 ):

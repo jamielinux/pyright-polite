@@ -2,7 +2,9 @@
 # SPDX-License-Identifier: MIT
 
 import asyncio
+import platform
 import signal
+import sys
 from unittest.mock import patch
 
 import pytest
@@ -43,14 +45,14 @@ async def test_empty_bytes(utils, capsys):
             "stdout_invalid_json",
             "Expecting property name enclosed in double quotes: line 2 column 1 (char 2)",
             marks=pytest.mark.skipif(
-                "platform.python_implementation() != 'CPython'", reason="CPython-only"
+                platform.python_implementation() != "CPython", reason="CPython-only"
             ),
         ),
         pytest.param(
             "stdout_invalid_json",
             "Key name must be string at char: line 2 column 1 (char 2)",
             marks=pytest.mark.skipif(
-                "platform.python_implementation() != 'PyPy'", reason="PyPy-only"
+                platform.python_implementation() != "PyPy", reason="PyPy-only"
             ),
         ),
         ("stdout_no_summary", "summary is missing"),
@@ -127,7 +129,7 @@ async def test_tasks_still_running(utils, capsys):
         )
 
 
-@pytest.mark.skipif("sys.platform == 'win32'", reason="POSIX-only")
+@pytest.mark.skipif(sys.platform == "win32", reason="POSIX-only")
 @pytest.mark.parametrize(
     ("sig", "returncode"),
     [

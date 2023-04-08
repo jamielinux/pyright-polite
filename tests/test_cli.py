@@ -1,6 +1,7 @@
 # SPDX-FileCopyrightText: Copyright © 2023 Jamie Nguyen <j@jamielinux.com>
 # SPDX-License-Identifier: MIT
 
+import sys
 from unittest.mock import patch
 
 import pytest
@@ -102,11 +103,11 @@ def test_pyright_found():
     [
         pytest.param(
             127,
-            marks=pytest.mark.skipif("sys.platform == 'win32'", reason="POSIX-only"),
+            marks=pytest.mark.skipif(sys.platform == "win32", reason="POSIX-only"),
         ),
         pytest.param(
             9009,
-            marks=pytest.mark.skipif("sys.platform != 'win32'", reason="Windows-only"),
+            marks=pytest.mark.skipif(sys.platform != "win32", reason="Windows-only"),
         ),
     ],
 )
@@ -124,7 +125,7 @@ def test_pyright_not_found(expected_returncode):
 
 
 @pytest.mark.disable_autouse()
-@pytest.mark.skipif("sys.platform == 'win32'", reason="POSIX-only")
+@pytest.mark.skipif(sys.platform == "win32", reason="POSIX-only")
 def test_pyright_not_executable():
     patcher_shutil = patch("shutil.which", return_value="pyright")
     patcher_shutil.start()

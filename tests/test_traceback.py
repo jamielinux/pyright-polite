@@ -4,6 +4,7 @@
 import asyncio
 import os
 import signal
+import sys
 from unittest.mock import patch
 
 import pytest
@@ -35,7 +36,7 @@ class MockCreateSubprocessExecTraceback:
         return self._returncode
 
 
-@pytest.mark.skipif("sys.platform == 'win32'", reason="POSIX-only")
+@pytest.mark.skipif(sys.platform == "win32", reason="POSIX-only")
 async def test_hide_traceback(utils, capsys):
     async def create_mock_subprocess_exec(*args, **kwargs):
         del args, kwargs
