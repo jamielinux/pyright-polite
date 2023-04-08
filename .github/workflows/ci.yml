@@ -9,6 +9,8 @@ on:
       - '.github/workflows/*'
       - 'CHANGELOG.*'
       - 'README.*'
+      - 'hatch.toml'
+      - 'pyproject.toml'
       - 'src/*/__about__.py'
   workflow_dispatch:
 
