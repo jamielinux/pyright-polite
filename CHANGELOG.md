@@ -1,4 +1,12 @@
 
+<a id='changelog-v1.0.3'></a>
+# v1.0.3 — 2023-04-09
+
+## Changed
+
+- Small tweaks to improve readability.
+- Improve README.
+
 <a id='changelog-v1.0.2'></a>
 # v1.0.2 — 2023-04-07
 
