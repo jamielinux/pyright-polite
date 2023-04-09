@@ -47,6 +47,8 @@ pyright-polite = "pyright_polite.main:main"
 addopts = [
   "--import-mode=importlib",
   "--strict-markers",
+  "--strict-config",
+  "-ra",
 ]
 markers = [
   "asyncio",
