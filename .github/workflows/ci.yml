@@ -7,8 +7,8 @@ on:
     paths-ignore:
       - '.changelog.d/**'
       - '.github/workflows/*'
-      - 'CHANGELOG.*'
-      - 'README.*'
+      - '*.md'
+      - 'LICENSE'
       - 'hatch.toml'
       - 'pyproject.toml'
       - 'src/*/__about__.py'
