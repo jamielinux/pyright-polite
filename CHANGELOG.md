@@ -1,4 +1,15 @@
 
+<a id='changelog-v1.0.4'></a>
+# v1.0.4 — 2023-04-10
+
+## Added
+
+- Add `__slots__` to `Polite` class.
+
+## Changed
+
+- Tweak docstrings.
+
 <a id='changelog-v1.0.3'></a>
 # v1.0.3 — 2023-04-09
 
