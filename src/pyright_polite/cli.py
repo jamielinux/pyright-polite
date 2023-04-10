@@ -72,7 +72,7 @@ class ArgumentParser(argparse.ArgumentParser):
         arguments, so we should do the same.
 
         The `exit_on_error` parameter for `argparse.ArgumentParser` was only introduced
-        in Python 3.9, so we can't make us of that.
+        in Python 3.9, so we can't make use of that.
         """
         self.print_usage(sys.stderr)
         args = {"prog": self.prog, "message": message}
@@ -138,8 +138,8 @@ def prepare_argv(parsed_args: argparse.Namespace) -> List[str]:
     This includes the pyright executable (ie, argv[0]).
 
     pyright has args that are incompatible with each other, but instead of recreating
-    pyright's compatibility logic we'll just let pyright complain if it receives a set
-    of incompatible args.
+    pyright's compatibility logic we'll just let pyright complain if it receives
+    incompatible args.
 
     Args:
         parsed_args (argparse.Namespace): The parsed arguments.
@@ -215,7 +215,7 @@ def deduce_mode(args: List[str]) -> Mode:
 
 
 def parse_cli() -> CommandLine:
-    """Handle command line arguments.
+    """Handle command-line arguments.
 
     Returns:
         CommandLine: The argv list and the deduced mode of operation.
