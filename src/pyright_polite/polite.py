@@ -30,6 +30,16 @@ class StreamName(Enum):
 class Polite:
     """Launch pyright, handle its output and react to signals."""
 
+    __slots__ = (
+        "subproc",
+        "_returncode",
+        "cli",
+        "stdout_lines",
+        "lock",
+        "signalled",
+        "signal_returncodes",
+    )
+
     def __init__(self, cli: CommandLine) -> None:
         """Prepare the instance."""
         self.subproc: asyncio.subprocess.Process
