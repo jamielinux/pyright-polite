@@ -200,18 +200,13 @@ def deduce_mode(args: List[str]) -> Mode:
     Returns:
         Mode: The deduced mode of operation.
     """
-    mode: Mode = Mode.JSON
-
     if "--outputjson" in args:
-        return mode
-
-    if any(arg in PLAINTEXT_ARGS for arg in args):
-        mode = Mode.PLAINTEXT
+        return Mode.JSON
 
     if any(arg in UNFILTERED_ARGS for arg in args):
-        mode = Mode.UNFILTERED
+        return Mode.UNFILTERED
 
-    return mode
+    return Mode.PLAINTEXT
 
 
 def parse_cli() -> CommandLine:
