@@ -34,6 +34,7 @@ def test_no_args():
         (["--dependencies"], Mode.UNFILTERED),
         (["--ignoreexternal", "--verifytypes", "foo"], Mode.PLAINTEXT),
         (["--stats"], Mode.UNFILTERED),
+        (["--createstub", "datetime", "--stats"], Mode.UNFILTERED),
     ],
 )
 def test_not_json(args, mode):
@@ -63,6 +64,19 @@ def test_json(args):
     with patch("sys.argv", ["pyright-polite", *args]):
         result = parse_cli()
         assert result.argv[1:] == [*args, "--outputjson"]
+        assert result.mode == Mode.JSON
+
+
+@pytest.mark.parametrize(
+    ("args"),
+    [
+        (["--stats", "--outputjson"]),
+    ],
+)
+def test_json_precedence(args):
+    with patch("sys.argv", ["pyright-polite", *args]):
+        result = parse_cli()
+        assert result.argv[1:] == [*args]
         assert result.mode == Mode.JSON
 
 
