@@ -1,4 +1,19 @@
 
+<a id='changelog-v1.0.5'></a>
+# v1.0.5 — 2023-04-11
+
+## Removed
+
+- Removed unnecessary `setup.cfg`.
+
+## Added
+
+- Added some more tests.
+
+## Changed
+
+- Tiny bit of code refactoring.
+
 <a id='changelog-v1.0.4'></a>
 # v1.0.4 — 2023-04-10
 
