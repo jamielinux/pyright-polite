@@ -12,6 +12,7 @@ exclude = [
 
 # Local tests
 [envs.default]
+python = "3.11"
 dependencies = [
   "black >= 23.1.0",
   "coverage ~= 7.2",
